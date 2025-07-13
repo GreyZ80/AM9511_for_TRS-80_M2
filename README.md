@@ -26,7 +26,7 @@ This means that after reading 16 bytes, the pattern is repeated. I have seen tha
 
 **Board design**
 
-The board was designed using Kicad version 6.4 and [Freerouting](https://github.com/freerouting/freerouting/) running on an ASUS Chromebook.
+The board was designed using [Kicad](https://www.kicad.org/) version 6.4 and [Freerouting](https://github.com/freerouting/freerouting/) running on an ASUS Chromebook.
 
 
 
