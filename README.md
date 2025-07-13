@@ -26,11 +26,11 @@ This means that after reading 16 bytes, the pattern is repeated. I have seen tha
 
 **Board design**
 
-The board was designed using Kicad version 6.4 running on an ASUS Chromebook.
+The board was designed using Kicad version 6.4 and [Freerouting](https://github.com/freerouting/freerouting/) running on an ASUS Chromebook.
 
 
 
 
 
 
-See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the MA9511 on the Tandy Color Computer.
+See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the AM9511 on the Tandy Color Computer.
