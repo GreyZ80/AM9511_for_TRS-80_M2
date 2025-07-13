@@ -23,3 +23,7 @@ Specifications of the board:
 First use of the board is in simple I/O mode. This means that status is polled. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
 A first check for operation/presense of the AM9511 is by repeatedly reading from port CA. Reading is not destructive, but the read from the AM9511 stack is placed back at the bottom of the stack which is 16 bytes deep.
 This means that after reading 16 bytes, the pattern is repeated. I have seen that after a reset most but not bytes are set to 0FFh.
+
+**Board design**
+
+The board was designed using Kicad version 6.4 running on an ASUS Chromebook.
