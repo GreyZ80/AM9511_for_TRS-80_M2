@@ -30,8 +30,6 @@ The board was designed using [Kicad](https://www.kicad.org/) version 6.4 and [Fr
 
 See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the AM9511 on the Tandy Color Computer.
 
-Source and License
-Design maintained at https://github.com/barberd/coco9511pak. Kicad and Freerouting were used to design the board.
 
 **Source and License**
 The design is copyright 2024 by Ruud Broers. The design is open source, distributed via the GNU GPL version 3 license. Please see the LICENSE file for details.
