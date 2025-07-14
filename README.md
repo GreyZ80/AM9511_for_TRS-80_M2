@@ -20,9 +20,13 @@ Specifications of the board:
 
 **Usage**
 --------------------------------------
-First use of the board is in simple I/O mode. This means that status is polled. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
-A first check for operation/presense of the AM9511 is by repeatedly reading from port CA. Reading is not destructive, but the read from the AM9511 stack is placed back at the bottom of the stack which is 16 bytes deep.
-This means that after reading 16 bytes, the pattern is repeated. I have seen that after a reset most but not bytes are set to 0FFh.
+First use of the board is in I/O mode. This means that status is polled on port 0CBh. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
+A first check for operation/presense of the AM9511 is by repeatedly reading from port 0CAh. A read from the stack also results in placing the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
+This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most but not bytes are set to 0FFh.
+
+**Important**
+--------------------------------------
+The AM9511 gets really hot during use. Consider placing a heatsick on the chip..
 
 **Board design**
 --------------------------------------
