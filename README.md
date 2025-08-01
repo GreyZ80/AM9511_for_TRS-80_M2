@@ -1,4 +1,4 @@
-# AM9511_for_TRS80_M2
+# AM9511_for_TRS-80_M2
 Design of a PCB board that enables the use of a AM9511 Arithmetic Processing Unit (APU) on a TRS-80 Model II.
 The AM9511 was developed by AMD.
 Intel licensed it and created the Intel 8231.
