@@ -1,0 +1,1 @@
+Kicad 6.0.11 was used to create the files.
