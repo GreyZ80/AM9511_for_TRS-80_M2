@@ -1,19 +1,22 @@
 # AM9511_for_TRS-80_M2
 Design of a PCB board that enables the use of a AM9511 Arithmetic Processing Unit (APU) on a TRS-80 Model II.\
 The AM9511 was developed by AMD. Intel licensed it and created the Intel 8231.\
-The chips are not difficult to obtain. So far I have not yet found fake chips.
+The chips are not difficult to obtain (search AliExpress). So far I have not yet found fake chips.
 
 A small board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. 
+
+![AM9511 1st version](https://github.com/user-attachments/assets/2227b329-59b5-4784-bfa3-920fcfe2c156)
+
 
 ## Specifications
 
 Specifications of the board:
-- I/O mapped on addresses 0CAh and 0CBh. This can be changed by reprogramming the GAL chip. Port CA was choosen because it was available and easy to remember: **CA**lculator
-  - 0CAh  read and write of data
-  - 0CBh  read of status and write of command
-- Address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10.
+- I/O mapped on addresses 0CAh and 0CBh. This can be changed by reprogramming the GAL chip. Port CA was choosen because it is not used and easy to remember: **CA**lculator
+  - 0CAh  reading and writing of data
+  - 0CBh  reading status and writing of commands
+- Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10.
 - Running on 2MHz with the option to connect an external clock signal.
-- D0~D7 of the TRS-80 Model II bus are inverted. A 74LS240 takes care of converting it back.
+- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS240 takes care of converting.
 - Jumpers are available for configuring the PAUSE* and END* signals.
 - Testpoints are present for checking of the signals on the board.
 - The board provides both +5V and +12V to the AM9511.
