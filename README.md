@@ -1,9 +1,9 @@
 # AM9511_for_TRS-80_M2
 Design of a PCB board that enables the use of a AM9511 Arithmetic Processing Unit (APU) on a TRS-80 Model II.\
 The AM9511 was developed by AMD. Intel licensed it and created the Intel 8231.\
-The chips are not difficult to obtain (search AliExpress). So far I have not yet found fake chips.
+The chips are not difficult to obtain (search AliExpress). So far I have not yet found fake chips 😃.
 
-A small board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. 
+A small board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. Check the AM9511A Processor Manual for details.
 
 ![AM9511 1st version](https://github.com/user-attachments/assets/2227b329-59b5-4784-bfa3-920fcfe2c156)
 
@@ -27,8 +27,22 @@ Specifications of the board:
 ## Usage
 
 First use of the board is in I/O mode. This means that status is polled on port 0CBh. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
-A first check for operation/presense of the AM9511 is by repeatedly reading from port 0CAh. A read from the stack also results in placing the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
-This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most but not bytes are set to 0FFh.
+A first check for operation/presense of the AM9511 is by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
+This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
+
+The following code performs a simple 16 bit addition.
+LD  C, 0CAH    ; data port
+LD  A, 34H    ; LSB of the 16 bit value 1234H
+OUT  (C),A
+LD  A, 12H
+OUT  (C),A
+LD  A, 78H    ; LSB of the 16 bit value 5678H
+OUT  (C),A
+LD  A, 56H
+OUT  (C),A
+LD  C,0CBH    ; command port
+LD  A,
+
 
 ## Board design
 
