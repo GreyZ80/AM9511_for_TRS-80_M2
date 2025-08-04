@@ -31,17 +31,21 @@ A first check for operation/presense of the AM9511 is by repeatedly reading from
 This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
 
 The following code performs a simple 16 bit addition.
-LD  C, 0CAH    ; data port
-LD  A, 34H    ; LSB of the 16 bit value 1234H
-OUT  (C),A
-LD  A, 12H
-OUT  (C),A
-LD  A, 78H    ; LSB of the 16 bit value 5678H
-OUT  (C),A
-LD  A, 56H
-OUT  (C),A
-LD  C,0CBH    ; command port
-LD  A,
+
+>LD  C, 0CAH    ; data port  
+LD  A, 34H    ; LSB of the 16 bit value 01234H  
+OUT  (C),A  
+LD  A, 12H  
+OUT  (C),A  
+LD  A, 78H    ; LSB of the 16 bit value 05678H  
+OUT  (C),A  
+LD  A, 56H  
+OUT  (C),A  
+LD  C,0CBH    ; command port  
+LD  A, 06CH    ; Instruction to add 2 16 bit numbers  
+LD  C,0CAH    ; data port  
+IN  A,(C)      ; get MSB of the result (should be 0ACH)  
+IN  A,(C)      ; get LSB of the result (should be 068H)  
 
 
 ## Board design
