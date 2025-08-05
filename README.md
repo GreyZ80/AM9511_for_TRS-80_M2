@@ -30,28 +30,29 @@ First use of the board is in I/O mode. This means that status is polled on port 
 A first check for operation/presense of the AM9511 is by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
 This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
 
-The following code performs a simple 16 bit addition.
+The following Z80 assembler code performs a simple 16 bit addition.
 
+```ruby
+LD    C, 0CAH    ; data port  
+LD    A, 34H     ; LSB of the 16 bit value 01234H  
+OUT   (C),A  
+LD    A, 12H  
+OUT   (C),A  
+LD    A, 78H     ; LSB of the 16 bit value 05678H  
+OUT   (C),A  
+LD    A, 56H  
+OUT   (C),A  
+LD    C,0CBH     ; command port  
+LD    A, 06CH    ; Instruction to add 2 16 bit numbers  
+LD    C,0CAH     ; data port  
+IN    A,(C)      ; get MSB of the result (should be 0ACH)  
+IN    A,(C)      ; get LSB of the result (should be 068H)  
 ```
-LD  C, 0CAH    ; data port  
-LD  A, 34H    ; LSB of the 16 bit value 01234H  
-OUT  (C),A  
-LD  A, 12H  
-OUT  (C),A  
-LD  A, 78H    ; LSB of the 16 bit value 05678H  
-OUT  (C),A  
-LD  A, 56H  
-OUT  (C),A  
-LD  C,0CBH    ; command port  
-LD  A, 06CH    ; Instruction to add 2 16 bit numbers  
-LD  C,0CAH    ; data port  
-IN  A,(C)      ; get MSB of the result (should be 0ACH)  
-IN  A,(C)      ; get LSB of the result (should be 068H)  
-```
+
 
 ## Board design
 
-The board was designed using [Kicad](https://www.kicad.org/) version 6.4 and [Freerouting](https://github.com/freerouting/freerouting/) running on an ASUS Chromebook.
+The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.
 
 See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the AM9511 on the Tandy Color Computer.
 
