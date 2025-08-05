@@ -27,7 +27,7 @@ Specifications of the board:
 ## Usage
 
 First use of the board is in I/O mode. This means that status is polled on port 0CBh. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
-A first check for operation/presense of the AM9511 is by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
+A first check for operation/presense of the AM9511 can be done by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
 This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
 
 The following Z80 assembler code performs a simple 16 bit addition.
@@ -52,7 +52,14 @@ IN    A,(C)      ; get LSB of the result (should be 068H)
 
 ## Board design
 
-The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.
+The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.\
+Port address decoding and signal inversion is performed by a 22V10 GAL chip.\
+Following is the source code for the GAL
+
+```ruby
+GAL Source code here  
+```
+
 
 See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the AM9511 on the Tandy Color Computer.
 
