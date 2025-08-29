@@ -24,7 +24,7 @@ Specifications of the board:
 
 ## Schematic
 
-The schematic provides a lot of jumpers enabling various modes of operation.\
+The schematic provides a lot of jumpers enabling various modes of operation.
 
 <img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
 
@@ -32,7 +32,7 @@ The schematic provides a lot of jumpers enabling various modes of operation.\
 ## Board design
 
 The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.\
-Port address decoding and signal inversion for RST is performed by a 22V10 GAL chip.\
+Port address decoding and signal inversion for RST is performed by a 22V10 GAL chip.
 
 <img width="500"  alt="Arithmetic processor pcb 2024-07-31 23 44 08" src="https://github.com/user-attachments/assets/9c9f94f6-1f6c-4b05-b4f7-c461b02af106" />
 
