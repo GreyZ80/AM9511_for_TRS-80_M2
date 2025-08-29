@@ -22,10 +22,32 @@ Specifications of the board:
 - Testpoints are present for checking of the signals on the board.
 - The board provides both +5V and +12V to the AM9511.
 
->[!CAUTION]
-> **Do not touch the AM9511 APU during use, as it becomes really hot. Consider placing a heatsick on the chip.**
+## Schematic
+
+The schematic provides a lot of jumpers enabling various modes of operation.\
+
+<img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
+
+
+## Board design
+
+The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.\
+Port address decoding and signal inversion for RST is performed by a 22V10 GAL chip.\
+
+<img width="500"  alt="Arithmetic processor pcb 2024-07-31 23 44 08" src="https://github.com/user-attachments/assets/9c9f94f6-1f6c-4b05-b4f7-c461b02af106" />
+
+
+Following is the source code for the GAL
+
+```ruby
+GAL Source code here  
+```
+
 
 ## Usage
+
+>[!CAUTION]
+> **Do not touch the AM9511 APU during use, as it becomes really hot. Consider placing a heatsick on the chip.**
 
 First use of the board is in I/O mode. This means that status is polled on port 0CBh. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
 A first check for operation/presense of the AM9511 can be done by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
@@ -51,15 +73,7 @@ IN    A,(C)      ; get LSB of the result (should be 068H)
 ```
 
 
-## Board design
 
-The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.\
-Port address decoding and signal inversion is performed by a 22V10 GAL chip.\
-Following is the source code for the GAL
-
-```ruby
-GAL Source code here  
-```
 
 
 See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of the AM9511 on the Tandy Color Computer.
