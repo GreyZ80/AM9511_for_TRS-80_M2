@@ -3,7 +3,8 @@ Design of a PCB board that enables the use of a AM9511 Arithmetic Processing Uni
 The AM9511 was developed by AMD. Intel licensed it and created the Intel 8231.\
 The chips are not difficult to obtain (search AliExpress). So far I have not yet found fake chips 😃.
 
-A small board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. Check the AM9511A Processor Manual for details.
+A small board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. Check the AM9511A Processor Manual for details.\
+The ZIF socket in the picture was used for easy swapping of AM9511 for chip testing. A final board would use a standard socket.
 
 ![AM9511 1st version](https://github.com/user-attachments/assets/2227b329-59b5-4784-bfa3-920fcfe2c156)
 
@@ -16,7 +17,7 @@ Specifications of the board:
   - 0CBh  reading status and writing of commands
 - Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10.
 - Running on 2MHz with the option to connect an external clock signal.
-- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS240 takes care of converting.
+- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care of converting. This is an Octal Inverting Bus Transceiver (Tri-State)
 - Jumpers are available for configuring the PAUSE* and END* signals.
 - Testpoints are present for checking of the signals on the board.
 - The board provides both +5V and +12V to the AM9511.
