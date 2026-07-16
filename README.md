@@ -15,7 +15,7 @@ Specifications of the board:
 - I/O mapped on addresses 0CAh and 0CBh. This can be changed by reprogramming the GAL chip. Port CA was choosen because it is not used and easy to remember: **CA**lculator
   - 0CAh  reading and writing of data
   - 0CBh  reading status and writing of commands
-- Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10.
+- Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10. The .PLD file used for the compilation in WinCupl has been added.
 - Running on 2MHz with the option to connect an external clock signal.
 - D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care of converting. This is an Octal Inverting Bus Transceiver (Tri-State)
 - Jumpers are available for configuring the PAUSE* and END* signals.
@@ -35,13 +35,6 @@ The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Fr
 Port address decoding and signal inversion for RST is performed by a 22V10 GAL chip.
 
 <img width="500"  alt="Arithmetic processor pcb 2024-07-31 23 44 08" src="https://github.com/user-attachments/assets/9c9f94f6-1f6c-4b05-b4f7-c461b02af106" />
-
-
-Following is the source code for the GAL
-
-```ruby
-GAL Source code here  
-```
 
 
 ## Usage
