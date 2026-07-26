@@ -12,19 +12,19 @@ The ZIF socket pictured was used for easy swapping of AM9511 for chip testing. A
 ## Specifications
 
 Specifications of the board:
-- I/O mapped on addresses 0CAh and 0CBh. This can be changed by reprogramming the GAL chip. Port CA was choosen because it is not used and easy to remember: **CA**lculator
-  - 0CAh  reading and writing of data
-  - 0CBh  reading status and writing of commands
+- I/O mapped on addresses 064h (100 decimal) and 065h (101 decimal). This can be changed by reprogramming the GAL chip. Note that ports 0C0h and above are more or less reserved/in use on the TRS-80.
+  - 064h  reading and writing of data
+  - 065h  reading status and writing of commands
 - Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10. The .PLD file used for the compilation in WinCupl has been added.
 - Running on 2MHz with the option to connect an external clock signal.
-- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care of converting. This is an Octal Inverting Bus Transceiver (Tri-State)
-- Jumpers are available for configuring the PAUSE* and END* signals.
+- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care the conversion. This is an Octal Inverting Bus Transceiver (Tri-State)
+- Jumpers are used for configuring the PAUSE* and END* signals.
 - Testpoints are present for checking of the signals on the board.
 - The board provides both +5V and +12V to the AM9511.
 
 ## Schematic
 
-The schematic provides a lot of jumpers enabling various modes of operation.
+The schematic provides jumpers enabling various modes of operation.
 
 <img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
 
@@ -42,27 +42,48 @@ Port address decoding and signal inversion for RST is performed by a 22V10 GAL c
 >[!CAUTION]
 > **Do not touch the AM9511 APU during use, as it becomes really hot. Consider placing a heatsick on the chip.**
 
-First use of the board is in I/O mode. This means that status is polled on port 0CBh. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
-A first check for operation/presense of the AM9511 can be done by repeatedly reading from port 0CAh. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
+First use of the board is in I/O mode. This means that status is polled on port 065h. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
+A first check for operation/presense of the AM9511 can be done by repeatedly reading from port 064h. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
 This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
 
 The following Z80 assembler code performs a simple 16 bit addition.
 
 ```ruby
-LD    C, 0CAH    ; data port  
+LD    C, 064H    ; data port  
 LD    A, 34H     ; LSB of the 16 bit value 01234H  
 OUT   (C),A  
-LD    A, 12H  
+LD    A, 12H     ; MSB
 OUT   (C),A  
 LD    A, 78H     ; LSB of the 16 bit value 05678H  
 OUT   (C),A  
-LD    A, 56H  
+LD    A, 56H     ; MSB
 OUT   (C),A  
-LD    C,0CBH     ; command port  
+LD    C,065H     ; command port  
 LD    A, 06CH    ; Instruction to add 2 16 bit numbers  
-LD    C,0CAH     ; data port  
-IN    A,(C)      ; get MSB of the result (should be 0ACH)  
-IN    A,(C)      ; get LSB of the result (should be 068H)  
+LD    C,064H     ; data port  
+IN    A,(C)      ; get MSB of the result (should be 068H)  
+IN    A,(C)      ; get LSB of the result (should be 0ACH)  
+```
+
+Of course the same can be achieved using Basic. Just boot your machine and type Basic at the prompt.
+```
+100 rem ---- AM9511 ----
+110 DP = &H64  :REM DATA PORT (64h)
+120 CP = &H65  :REM Command/Status port (65h)
+130 A = &H1234
+140 B = &H5678
+150 MSB = INT(A/256)
+160 LSB = MOD(A,256)
+170 OUT DP,LSB : OUT DP, MSB
+180 MSB = INT(B/256)
+190 LSB = MOD(B,256)
+200 OUT DP,LSB : OUT DP, MSB
+210 OUT CP,&H6C
+220 MSB = INP(DP) : LSB = INP(DP)
+230 R = MSB * 256 + LSB
+240 PRINT A;" +";B;" =";R
+
+
 ```
 
 
@@ -74,4 +95,4 @@ See [barberd/coco9511pak](https://github.com/barberd/coco9511pak) for support of
 
 **Source and License**
 -------------------------------------
-The design is copyright 2024 by Ruud Broers. The design is open source, distributed via the GNU GPL version 3 license. Please see the LICENSE file for details.
+The design is copyright 2024, 2026 by Ruud Broers. The design is open source, distributed via the GNU GPL version 3 license. Please see the LICENSE file for details.
