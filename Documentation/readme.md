@@ -4,3 +4,6 @@ In the Basic folder there is a quick and dirty test program for the AM9511. It a
 The program shows the full stack and allows entering operands and commands.\
 Commands are entered by typing-in their mnemonic.
 Note that running the code using a Basic interpreter is not really fast. The AM9511 busy flag is only detected for complex operations that take a relatively long time to complete.
+
+Notes:\
+**Am9511 FPU datasheet.pdf** does not preview in Github, but is OK when downloaded\
