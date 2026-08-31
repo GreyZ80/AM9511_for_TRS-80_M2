@@ -42,8 +42,8 @@ Port address decoding and signal inversion for RST is performed by a 22V10 GAL c
 >[!CAUTION]
 > **Do not touch the AM9511 APU during use, as it becomes really hot. Consider placing a heatsick on the chip.**
 
-First use of the board is in I/O mode. This means that status is polled on port 065h. Write timing is influenced by the AM9511 by means of the PAUSE* signal that is connected to the Z80 WAIT* line.
-A first check for operation/presense of the AM9511 can be done by repeatedly reading from port 064h. A read from the stack not only puts the byte that is on top of the stack in register, but also places the byte from the top of the stack at the bottom of the stack. The stack is 16 bytes deep.
+First use of the board is in I/O mode. This means that status is polled on port 065h. Write timing is influenced by the AM9511 by means of the PAUSE* signal when it is connected to the Z80 WAIT* line. For testing this is not needed and the Busy flag can be monitored at Port 065h.\
+A first check for operation/presence of the AM9511 can be done by repeatedly reading from port 064h. A read from the stack not only puts the byte that is on top of the stack in register A, but also places the byte from the top of the stack at the bottom of the stack. Actually the stack pointer is moved. The stack is 16 bytes deep.
 This means that after reading 16 bytes, the data read from the stack is repeated. I have seen that after a reset most, but not all, bytes are set to 0FFh.
 
 The following Z80 assembler code performs a simple 16 bit addition.
