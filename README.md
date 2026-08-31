@@ -1,7 +1,7 @@
 # AM9511_for_TRS-80_M2
 Design of a PCB board (started Jul 13, 2025) that enables the use of a AM9511 Arithmetic Processing Unit (APU) on a TRS-80 Model II.\
 The AM9511 was developed by AMD. Intel licensed it and created the Intel 8231.\
-The chips are not difficult to obtain (search AliExpress). So far I have not yet found fake chips 😃.
+The chips are not difficult to obtain (search http://iainventory.com or http://AliExpress.com. So far I have not yet found fake chips 😃.
 
 A small proto board was developed for the TRS-80 Model II. The design is based on the sample circuits in the AM9511 documentation, with modifications needed to use it in a TRS-80 Model II. Check the AM9511A Processor Manual for details. 
 The ZIF socket pictured was used for easy swapping of AM9511 for chip testing. A final board would use a standard socket.
@@ -15,9 +15,9 @@ Specifications of the board:
 - I/O mapped on addresses 064h (100 decimal) and 065h (101 decimal). This can be changed by reprogramming the GAL chip. Note that ports 0C0h and above are more or less reserved/in use on the TRS-80.
   - 064h  reading and writing of data
   - 065h  reading status and writing of commands
-- Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10. The .PLD file used for the compilation in WinCupl has been added.
-- Running on 2MHz with the option to connect an external clock signal.
-- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care the conversion. This is an Octal Inverting Bus Transceiver (Tri-State)
+- Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10. The .PLD file used for the compilation in WinCupl has been added. The .JED file can be used by a GAL programmer.
+- Running on 3MHz with the option to connect an external clock signal.
+- D0~D7 of the TRS-80 Model II bus are inverted on the bus. A 74LS640 takes care the conversion. This is an Octal <ins>Inverting</ins> Bus Transceiver (Tri-State)
 - Jumpers are used for configuring the PAUSE* and END* signals.
 - Testpoints are present for checking of the signals on the board.
 - The board provides both +5V and +12V to the AM9511.
@@ -78,7 +78,7 @@ Of course the same can be achieved using Basic. Just boot your machine and type 
 180 MSB = INT(B/256)
 190 LSB = MOD(B,256)
 200 OUT DP,LSB : OUT DP, MSB
-210 OUT CP,&H6C
+210 OUT CP,&H6C  :REM 06CH is the value of the instruction to add 2 16 bit numbers 
 220 MSB = INP(DP) : LSB = INP(DP)
 230 R = MSB * 256 + LSB
 240 PRINT A;" +";B;" =";R
