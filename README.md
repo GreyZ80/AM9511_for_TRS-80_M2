@@ -12,7 +12,7 @@ The ZIF socket pictured was used for easy swapping of AM9511 for chip testing. A
 ## Specifications
 
 Specifications of the board:
-- I/O mapped on addresses 064h (100 decimal) and 065h (101 decimal). This can be changed by reprogramming the GAL chip. Note that ports 0C0h and above are more or less reserved/in use on the TRS-80.
+- I/O mapped on addresses 064h (100 decimal) and 065h (101 decimal). This can be changed by reprogramming the GAL chip. Note that ports 0C0h and higher are in use by the internal and peripheral hardware .
   - 064h  reading and writing of data
   - 065h  reading status and writing of commands
 - Port address decoding and RD*, WR*, CS* and RESET* signal generation is done using a GAL 22V10. The .PLD file used for the compilation in WinCupl has been added. The .JED file can be used by a GAL programmer.
@@ -24,7 +24,9 @@ Specifications of the board:
 
 ## Schematic
 
-The schematic provides jumpers enabling various modes of operation.
+The schematic provides jumpers enabling various modes of operation.\
+Set JP. to use the on-board clock.\
+Set jP. to use the AM9511 Pause* to activate Z80 Wait*
 
 <img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
 
