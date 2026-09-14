@@ -25,8 +25,8 @@ Specifications of the board:
 ## Schematic
 
 The schematic provides jumpers enabling various modes of operation.\
-Set JP. to use the on-board clock.\
-Set jP. to use the AM9511 Pause* to activate Z80 Wait*
+Set JP3 to connect the on-board clock to the AM9511\
+Set jP4 to use the AM9511 Pause* to activate Z80 Wait*
 
 <img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
 
