@@ -24,9 +24,13 @@ Specifications of the board:
 
 ## Schematic
 
-The schematic provides jumpers enabling various modes of operation.\
-Set JP3 to connect the on-board clock to the AM9511\
-Set jP4 to use the AM9511 Pause* to activate Z80 Wait*
+The schematic provides jumpers enabling various modes of operation.
+- JP1 is only used for clock generators that have an Enable line. Otherwise it can be left open.
+- JP2 is set when running in interrupt mode. The AM9511 will trigger an interrupt when ready. Leave open when using polling (reading the Busy bit).
+- Set JP3 to connect the on-board clock to the AM9511.
+- Set jP4 to use the AM9511 Pause* to activate Z80 Wait*.
+
+A data buffer interfaces the AM9511 to the TRS-80 databus. A GAL chip takes care of address decoding and signal inversion for RESET is performed by a 22V10 GAL chip.
 
 <img width="500" alt="Schematic 0 2" src="https://github.com/user-attachments/assets/d3d50e7d-1868-47c7-be61-6cf8b30654e6" />
 
@@ -34,7 +38,7 @@ Set jP4 to use the AM9511 Pause* to activate Z80 Wait*
 ## Board design
 
 The board was designed using [Kicad](https://www.kicad.org/) version 6.0 and [Freerouting](https://github.com/freerouting/freerouting/) running on my ASUS Chromebook.\
-Port address decoding and signal inversion for RST is performed by a 22V10 GAL chip.
+
 
 <img width="500"  alt="Arithmetic processor pcb 2024-07-31 23 44 08" src="https://github.com/user-attachments/assets/9c9f94f6-1f6c-4b05-b4f7-c461b02af106" />
 
